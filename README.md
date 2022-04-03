@@ -1,16 +1,26 @@
-# daily_tasks
+## daily_tasks
 
-A new Flutter project.
+Flutter project that allows users to manage time while being focused on daily tasks.
+The main goal of this project is to increase development skills in Flutter and Dart.
+
+Scheduled features
+- [ ] Bottom Navigation Bar with 4 pages and Elevated Button who is responsible for adding new tasks
+- [ x ] Connection with Quotes API
+- [ ] Add ScrollView of Tasks
+- [ ] Panel that allows users to customize time spend on daily tasks
+- [ ] Bar Chart that shows progress done while whole week
+- [ ] Achievements system
+- [ ] Dashboard that contains all statistics
+- [ ] ...
+- [ ]
+
+## Design Concept
+https://www.figma.com/file/SkRBTc5GSVE5oR4EXEcu9H/daily_pomodoro?node-id=0%3A1
 
 ## Getting Started
+- cd ~/daily_tasks
+- flutter pub get
+- flutter doctor
+- flutter run
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
