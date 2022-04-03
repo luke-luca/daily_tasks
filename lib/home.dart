@@ -1,7 +1,7 @@
-import 'page/achivments.dart';
-import 'page/calendar.dart';
-import 'page/dashboard.dart';
-import 'page/settings.dart';
+import 'pages/Achivments/achivments.dart';
+import 'pages/Calendar/calendar.dart';
+import 'pages/Dashboard/dashboard.dart';
+import 'pages/Settings/settings.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -72,10 +72,7 @@ class _HomeState extends State<Home> {
                     style: ElevatedButton.styleFrom(
                       primary: const Color.fromARGB(255, 255, 255, 255),
                       elevation: 0,
-
-                      // background
                     ),
-                    //elevated/inque;l
                     onPressed: () {
                       setState(() {
                         currentScreen = const Calendar();
