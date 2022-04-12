@@ -1,7 +1,9 @@
+import 'package:daily_tasks/db/prefs.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 
-void main() {
+Future<void> main() async {
+  await HddRepo().initPrefs();
   runApp(const MyApp());
 }
 

@@ -1,3 +1,4 @@
+import 'package:daily_tasks/db/prefs.dart';
 import 'package:flutter/material.dart';
 import '../../../db/tasks_database.dart';
 import '../../../model/tasks.dart';
@@ -16,6 +17,14 @@ class DashboardTile extends StatefulWidget {
 
 class _DashboardTileState extends State<DashboardTile> {
   final taskDatabase = TasksDatabase.instance;
+  late Future<Task> task;
+
+  @override
+  void initState() {
+    super.initState();
+    task = getTask();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GridTile(
@@ -39,10 +48,17 @@ class _DashboardTileState extends State<DashboardTile> {
               height: 50,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [],
+                child: FutureBuilder<Task>(
+                  future: task,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (!snapshot.hasData) {
+                      return const Text('Błąd');
+                    } else {
+                      return Text(snapshot.data?.taskName ?? 'xD');
+                    }
+                  },
                 ),
               ),
             ),
@@ -65,13 +81,10 @@ class _DashboardTileState extends State<DashboardTile> {
     // ...
   }
 
-  Future<List> getTask() async {
-    final query = taskDatabase.readTask(1);
-    List<Task> taskList = [];
-    await query.then((value) {
-      taskList = value as List<Task>;
-    });
-    print(taskList);
-    return taskList;
+  Future<Task> getTask() async {
+    // Task taskList = await taskDatabase.readTask(1);
+    Task task = (await HddRepo().getTasks()).first;
+    print(task);
+    return task;
   }
 }
