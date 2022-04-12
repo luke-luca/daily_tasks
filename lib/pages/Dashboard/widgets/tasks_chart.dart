@@ -5,7 +5,10 @@ import '../models/tasks_series.dart';
 class TasksChart extends StatelessWidget {
   final List<TasksSeries> data;
 
-  const TasksChart({required this.data});
+  const TasksChart({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class TasksChart extends StatelessWidget {
           colorFn: (TasksSeries series, _) => series.barColor)
     ];
 
-    return Container(
+    return SizedBox(
       height: 200,
       child: Card(
         child: Padding(

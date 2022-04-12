@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../model/tasks.dart';
@@ -19,6 +21,7 @@ class TasksDatabase {
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
+    await Sqflite.devSetDebugModeOn(true);
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
@@ -28,19 +31,19 @@ class TasksDatabase {
     const intType = 'INTEGER NOT NULL';
 
     await db.execute('''
-      CREATE TABLE $tableTasks(
-        ${TaskFields.id} $idType,
-        ${TaskFields.taskName} $stringType,
-        ${TaskFields.category} $stringType,
-        ${TaskFields.description} $stringType
-        ${TaskFields.minutes} $intType,
-        ${TaskFields.seconds} $intType,
-      )
-    ''');
+CREATE TABLE $tableTasks(
+  ${TaskFields.id} $idType,
+  ${TaskFields.taskName} $stringType,
+  ${TaskFields.category} $stringType,
+  ${TaskFields.description} $stringType,
+  ${TaskFields.minutes} $intType,
+  ${TaskFields.seconds} $intType)
+''');
   }
 
   Future<Task> create(Task task) async {
     final db = await instance.database;
+    log(task.toJson().toString());
     final id = await db.insert(tableTasks, task.toJson());
     return task.copy(id: id);
   }

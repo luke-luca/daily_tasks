@@ -1,4 +1,3 @@
-import 'package:daily_tasks/pages/Dashboard/widgets/taskName.dart';
 import 'package:flutter/material.dart';
 import '../../../db/tasks_database.dart';
 import '../../../model/tasks.dart';
@@ -41,11 +40,10 @@ class _DashboardTileState extends State<DashboardTile> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TaskName(),
-                    ]),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [],
+                ),
               ),
             ),
             if (widget.editingMode)

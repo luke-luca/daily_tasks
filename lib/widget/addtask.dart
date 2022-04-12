@@ -20,11 +20,6 @@ class _AddTaskState extends State<AddTask> {
   final taskSecondsController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     taskNameController.dispose();
     taskDescriptionController.dispose();

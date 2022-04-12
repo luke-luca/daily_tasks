@@ -73,7 +73,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          Container(
+                          SizedBox(
                             height: 400,
                             child: GridView.count(
                               scrollDirection: Axis.horizontal,
