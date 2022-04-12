@@ -1,6 +1,7 @@
-import 'package:daily_tasks/db/tasks_database.dart';
-import 'package:daily_tasks/model/tasks.dart';
+import 'package:daily_tasks/pages/Dashboard/widgets/taskName.dart';
 import 'package:flutter/material.dart';
+import '../../../db/tasks_database.dart';
+import '../../../model/tasks.dart';
 
 class DashboardTile extends StatefulWidget {
   const DashboardTile({
@@ -15,6 +16,7 @@ class DashboardTile extends StatefulWidget {
 }
 
 class _DashboardTileState extends State<DashboardTile> {
+  final taskDatabase = TasksDatabase.instance;
   @override
   Widget build(BuildContext context) {
     return GridTile(
@@ -42,14 +44,7 @@ class _DashboardTileState extends State<DashboardTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        //TO DO fetch data from database, not hardcoded
-                        'Tasks',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 20,
-                        ),
-                      ),
+                      TaskName(),
                     ]),
               ),
             ),
@@ -72,9 +67,13 @@ class _DashboardTileState extends State<DashboardTile> {
     // ...
   }
 
-  Future readTask() async {
-    final tasks = await TasksDatabase.instance.readTask(1);
-
-    return tasks.taskName;
+  Future<List> getTask() async {
+    final query = taskDatabase.readTask(1);
+    List<Task> taskList = [];
+    await query.then((value) {
+      taskList = value as List<Task>;
+    });
+    print(taskList);
+    return taskList;
   }
 }

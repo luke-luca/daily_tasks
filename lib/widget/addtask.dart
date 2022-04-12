@@ -1,5 +1,5 @@
+import 'package:daily_tasks/db/tasks_database.dart';
 import 'package:flutter/material.dart';
-import '../db/tasks_database.dart';
 import '../model/tasks.dart';
 
 class AddTask extends StatefulWidget {
@@ -12,6 +12,7 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
+  final taskDatabase = TasksDatabase.instance;
   final taskNameController = TextEditingController();
   final taskDescriptionController = TextEditingController();
   final taskCategoryController = TextEditingController();
@@ -56,26 +57,19 @@ class _AddTaskState extends State<AddTask> {
         ElevatedButton(
           child: const Text('Add'),
           onPressed: () {
-            addTask();
+            taskDatabase.create(
+              Task(
+                taskName: taskNameController.text,
+                description: taskDescriptionController.text,
+                category: taskCategoryController.text,
+                minutes: int.parse(taskMinutesController.text),
+                seconds: int.parse(taskSecondsController.text),
+              ),
+            );
             Navigator.pop(context);
           },
         ),
       ],
     );
-  }
-
-  Future addTask() async {
-    final task = Task(
-      taskName: taskNameController.text,
-      category: taskCategoryController.text,
-      description: taskDescriptionController.text,
-      minutes: 0,
-      seconds: 0,
-    );
-
-    await TasksDatabase.instance.create(task);
-    print(taskNameController.text);
-    print(taskCategoryController.text);
-    print(taskDescriptionController.text);
   }
 }

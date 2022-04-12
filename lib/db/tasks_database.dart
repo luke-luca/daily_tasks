@@ -32,9 +32,9 @@ class TasksDatabase {
         ${TaskFields.id} $idType,
         ${TaskFields.taskName} $stringType,
         ${TaskFields.category} $stringType,
+        ${TaskFields.description} $stringType
         ${TaskFields.minutes} $intType,
         ${TaskFields.seconds} $intType,
-        ${TaskFields.description} $stringType
       )
     ''');
   }
