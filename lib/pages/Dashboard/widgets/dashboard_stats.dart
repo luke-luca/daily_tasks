@@ -10,10 +10,10 @@ class DashboardStats extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.00),
-          child: const Text(
-            'XYZ',
+        const Padding(
+          padding: EdgeInsets.only(top: 8.0, bottom: 8.00),
+          child: Text(
+            'Hi, John',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w900,

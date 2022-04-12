@@ -1,10 +1,9 @@
 import 'package:daily_tasks/pages/Dashboard/widgets/daily_quote.dart';
 import 'package:daily_tasks/pages/Dashboard/widgets/tasks_chart.dart';
-import 'package:daily_tasks/pages/Dashboard/models/tasks_series.dart';
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'widgets/dashboard_stats.dart';
 import 'widgets/dashboard_tile.dart';
+import 'models/tasks.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -17,36 +16,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   bool editingMode = false;
-  final List<TasksSeries> data = [
-    TasksSeries(
-        weekDay: 'Mon',
-        tasksDone: 10,
-        barColor: charts.ColorUtil.fromDartColor(Colors.blue)),
-    TasksSeries(
-        weekDay: 'Tue',
-        tasksDone: 20,
-        barColor: charts.ColorUtil.fromDartColor(Colors.green)),
-    TasksSeries(
-        weekDay: 'Wed',
-        tasksDone: 30,
-        barColor: charts.ColorUtil.fromDartColor(Colors.red)),
-    TasksSeries(
-        weekDay: 'Thu',
-        tasksDone: 40,
-        barColor: charts.ColorUtil.fromDartColor(Colors.yellow)),
-    TasksSeries(
-        weekDay: 'Fri',
-        tasksDone: 50,
-        barColor: charts.ColorUtil.fromDartColor(Colors.orange)),
-    TasksSeries(
-        weekDay: 'Sat',
-        tasksDone: 60,
-        barColor: charts.ColorUtil.fromDartColor(Colors.purple)),
-    TasksSeries(
-        weekDay: 'Sun',
-        tasksDone: 70,
-        barColor: charts.ColorUtil.fromDartColor(Colors.pink)),
-  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -79,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
                           fontSize: 45,
                         ),
                       ),
-                      DashboardStats(),
+                      const DashboardStats(),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 20),
                         child: Center(
@@ -94,13 +63,13 @@ class _DashboardState extends State<Dashboard> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Your daily tasks',
                                 style: TextStyle(fontSize: 24),
                               ),
                               TextButton(
                                 onPressed: () => _onTapEdit(context),
-                                child: Text('Edit'),
+                                child: const Text('Edit'),
                               ),
                             ],
                           ),

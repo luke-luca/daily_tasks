@@ -5,7 +5,7 @@ The main goal of this project is to increase development skills in Flutter and D
 
 Scheduled features
 - [x] Bottom Navigation Bar with 4 pages and Elevated Button who is responsible for adding new tasks
-- [x] Connection with Quotes API
+- [x] Connection with Quotes API using Dio
 - [x] Add ScrollView of Tasks
 - [ ] Panel that allows users to customize time spend on daily tasks
 - [ ] Bar Chart that shows progress done while whole week

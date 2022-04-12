@@ -24,11 +24,11 @@ class _DailyQuoteState extends State<DailyQuote> {
       future: futureQuote,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (!snapshot.hasData) {
-          return Center(
+          return const Center(
             child: Text('Failed to load quote'),
           );
         } else {
@@ -41,7 +41,8 @@ class _DailyQuoteState extends State<DailyQuote> {
                     snapshot.data!.first.quoteText +
                         ' - ' +
                         snapshot.data!.first.quoteAuthor,
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),

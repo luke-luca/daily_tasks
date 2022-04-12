@@ -1,4 +1,5 @@
-import 'pages/Achivments/achivments.dart';
+import 'package:daily_tasks/pages/Achievements/achievements.dart';
+import 'package:daily_tasks/widget/addtask.dart';
 import 'pages/Calendar/calendar.dart';
 import 'pages/Dashboard/dashboard.dart';
 import 'pages/Settings/settings.dart';
@@ -14,14 +15,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentTab = 0;
   final List<Widget> screens = [
-    Dashboard(),
+    const Dashboard(),
     const Calendar(),
-    const Achivments(),
+    const Achievements(),
     const Settings(),
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = Dashboard();
+  Widget currentScreen = const Dashboard();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,12 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => AddTask(),
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -52,7 +58,7 @@ class _HomeState extends State<Home> {
                     ),
                     onPressed: () {
                       setState(() {
-                        currentScreen = Dashboard();
+                        currentScreen = const Dashboard();
                         currentTab = 0;
                       });
                     },
@@ -105,7 +111,7 @@ class _HomeState extends State<Home> {
                     ),
                     onPressed: () {
                       setState(() {
-                        currentScreen = const Achivments();
+                        currentScreen = const Achievements();
                         currentTab = 2;
                       });
                     },
@@ -125,8 +131,6 @@ class _HomeState extends State<Home> {
                     style: ElevatedButton.styleFrom(
                       primary: const Color.fromARGB(255, 255, 255, 255),
                       elevation: 0,
-
-                      // background
                     ),
                     onPressed: () {
                       setState(() {

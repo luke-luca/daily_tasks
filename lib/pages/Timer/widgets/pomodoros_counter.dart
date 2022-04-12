@@ -10,7 +10,7 @@ class CheckRow extends StatelessWidget {
 
   BoxDecoration buildBox() {
     if (isDone) {
-      return BoxDecoration(
+      return const BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.orange,
       );
@@ -28,7 +28,7 @@ class CheckRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.orange,
               ),
@@ -36,40 +36,40 @@ class CheckRow extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Visibility(
                   visible: isDone,
-                  child: Icon(Icons.check),
+                  child: const Icon(Icons.check),
                 ),
               ),
             ),
-            Expanded(child: Divider(color: Colors.black)),
+            const Expanded(child: Divider(color: Colors.black)),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.orange,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Icon(Icons.check),
               ),
             ),
-            Expanded(child: Divider(color: Colors.black)),
+            const Expanded(child: Divider(color: Colors.black)),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.orange,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Icon(Icons.check),
               ),
             ),
-            Expanded(child: Divider(color: Colors.black)),
+            const Expanded(child: Divider(color: Colors.black)),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.orange,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Icon(Icons.check),
               ),
             ),

@@ -1,6 +1,8 @@
+import 'package:daily_tasks/db/tasks_database.dart';
+import 'package:daily_tasks/model/tasks.dart';
 import 'package:flutter/material.dart';
 
-class DashboardTile extends StatelessWidget {
+class DashboardTile extends StatefulWidget {
   const DashboardTile({
     Key? key,
     required this.editingMode,
@@ -8,6 +10,11 @@ class DashboardTile extends StatelessWidget {
 
   final bool editingMode;
 
+  @override
+  State<DashboardTile> createState() => _DashboardTileState();
+}
+
+class _DashboardTileState extends State<DashboardTile> {
   @override
   Widget build(BuildContext context) {
     return GridTile(
@@ -24,7 +31,7 @@ class DashboardTile extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ]),
               width: 150,
@@ -36,15 +43,17 @@ class DashboardTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Title',
-                        style: TextStyle(fontSize: 24),
+                        //TO DO fetch data from database, not hardcoded
+                        'Tasks',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20,
+                        ),
                       ),
-                      Text('Category'),
-                      Text('Description')
                     ]),
               ),
             ),
-            if (editingMode)
+            if (widget.editingMode)
               Align(
                 alignment: Alignment.topRight,
                 child: IconButton(
@@ -61,5 +70,11 @@ class DashboardTile extends StatelessWidget {
 
   void _delete() {
     // ...
+  }
+
+  Future readTask() async {
+    final tasks = await TasksDatabase.instance.readTask(1);
+
+    return tasks.taskName;
   }
 }
