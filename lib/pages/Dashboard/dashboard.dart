@@ -1,6 +1,8 @@
 import 'package:daily_tasks/pages/Dashboard/widgets/daily_quote.dart';
 import 'package:daily_tasks/pages/Dashboard/widgets/tasks_chart.dart';
 import 'package:flutter/material.dart';
+import '../../db/prefs.dart';
+import '../../model/tasks.dart';
 import 'widgets/dashboard_stats.dart';
 import 'widgets/dashboard_tile.dart';
 import 'models/tasks.dart';
@@ -15,7 +17,15 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  late Future<List<Task>> tasksList;
   bool editingMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    tasksList = getTaskList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,18 +85,33 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           SizedBox(
                             height: 400,
-                            child: GridView.count(
-                              scrollDirection: Axis.horizontal,
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 20,
-                              crossAxisSpacing: 20,
-                              children: [
-                                DashboardTile(editingMode: editingMode),
-                                DashboardTile(editingMode: editingMode),
-                                DashboardTile(editingMode: editingMode),
-                                DashboardTile(editingMode: editingMode),
-                                DashboardTile(editingMode: editingMode),
-                              ],
+                            child: FutureBuilder<List<Task>>(
+                              future: tasksList,
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else if (!snapshot.hasData) {
+                                  return const Center(child: Text('błąd'));
+                                } else {
+                                  return GridView.builder(
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: snapshot.data!.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, i) {
+                                      return DashboardTile(
+                                        editingMode: editingMode,
+                                        text:
+                                            snapshot.data?[i].taskName ?? 'b/d',
+                                      );
+                                    },
+                                  );
+                                }
+                              },
                             ),
                           ),
                         ],
@@ -106,5 +131,10 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       editingMode = !editingMode;
     });
+  }
+
+  Future<List<Task>> getTaskList() async {
+    List<Task> taskList = await HddRepo().getTasks();
+    return taskList;
   }
 }

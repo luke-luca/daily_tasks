@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await HddRepo().initPrefs();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
