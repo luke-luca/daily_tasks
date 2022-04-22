@@ -1,22 +1,24 @@
-import 'package:daily_tasks/pages/Dashboard/widgets/taskName.dart';
+import 'package:daily_tasks/db/tasks_database.dart';
 import 'package:flutter/material.dart';
-import '../../../db/tasks_database.dart';
-import '../../../model/tasks.dart';
 
-class DashboardTile extends StatefulWidget {
+class DashboardTile extends StatelessWidget {
   const DashboardTile({
     Key? key,
     required this.editingMode,
+    required this.textTaskName,
+    required this.textTaskDescription,
+    required this.textTaskCategory,
+    required this.textTaskMinutes,
+    required this.textTaskSeconds,
   }) : super(key: key);
 
   final bool editingMode;
+  final String textTaskName;
+  final String textTaskDescription;
+  final String textTaskCategory;
+  final String textTaskMinutes;
+  final String textTaskSeconds;
 
-  @override
-  State<DashboardTile> createState() => _DashboardTileState();
-}
-
-class _DashboardTileState extends State<DashboardTile> {
-  final taskDatabase = TasksDatabase.instance;
   @override
   Widget build(BuildContext context) {
     return GridTile(
@@ -25,7 +27,7 @@ class _DashboardTileState extends State<DashboardTile> {
           fit: StackFit.expand,
           children: [
             Container(
-              decoration: BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.deepOrange,
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
@@ -33,22 +35,26 @@ class _DashboardTileState extends State<DashboardTile> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3),
                     ),
-                  ]),
-              width: 150,
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                  ],
+                ),
+                width: 20,
+                height: 20,
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TaskName(),
-                    ]),
-              ),
-            ),
-            if (widget.editingMode)
+                  children: [
+                    Text(
+                      textTaskName,
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                    ),
+                    Text(textTaskDescription),
+                    Text(textTaskCategory),
+                    Text(textTaskMinutes),
+                    Text(textTaskSeconds),
+                  ],
+                )),
+            if (editingMode)
               Align(
                 alignment: Alignment.topRight,
                 child: IconButton(
@@ -63,17 +69,5 @@ class _DashboardTileState extends State<DashboardTile> {
     );
   }
 
-  void _delete() {
-    // ...
-  }
-
-  Future<List> getTask() async {
-    final query = taskDatabase.readTask(1);
-    List<Task> taskList = [];
-    await query.then((value) {
-      taskList = value as List<Task>;
-    });
-    print(taskList);
-    return taskList;
-  }
+  void _delete() {}
 }

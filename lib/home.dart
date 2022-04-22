@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (BuildContext context) => AddTask(),
+            builder: (BuildContext context) => const AddTask(),
           );
         },
       ),

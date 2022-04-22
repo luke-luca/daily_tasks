@@ -32,9 +32,9 @@ class TasksDatabase {
         ${TaskFields.id} $idType,
         ${TaskFields.taskName} $stringType,
         ${TaskFields.category} $stringType,
-        ${TaskFields.description} $stringType
+        ${TaskFields.description} $stringType,
         ${TaskFields.minutes} $intType,
-        ${TaskFields.seconds} $intType,
+        ${TaskFields.seconds} $intType
       )
     ''');
   }
@@ -75,6 +75,11 @@ class TasksDatabase {
     final db = await instance.database;
     return await db
         .delete(tableTasks, where: '${TaskFields.id} = ?', whereArgs: [id]);
+  }
+
+  Future deleteAll() async {
+    final db = await instance.database;
+    return await db.delete(tableTasks);
   }
 
   Future close() async {

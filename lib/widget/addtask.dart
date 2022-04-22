@@ -42,14 +42,31 @@ class _AddTaskState extends State<AddTask> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          TextField(controller: taskNameController),
-          TextField(controller: taskDescriptionController),
-          TextField(controller: taskCategoryController),
-          TextField(controller: taskMinutesController),
-          TextField(controller: taskSecondsController),
+          TextField(
+              controller: taskNameController,
+              decoration: const InputDecoration(labelText: 'Task name')),
+          TextField(
+              controller: taskDescriptionController,
+              decoration: const InputDecoration(labelText: 'Task Description')),
+          TextField(
+            controller: taskCategoryController,
+            decoration: const InputDecoration(labelText: 'Task Category'),
+          ),
+          TextField(
+              controller: taskMinutesController,
+              decoration: const InputDecoration(labelText: 'Task Minutes')),
+          TextField(
+              controller: taskSecondsController,
+              decoration: const InputDecoration(labelText: 'Task Seconds')),
         ],
       ),
       actions: [
+        ElevatedButton(
+          child: const Text('DeleteAll'),
+          onPressed: () {
+            taskDatabase.deleteAll();
+          },
+        ),
         ElevatedButton(
           child: const Text('Cancel'),
           onPressed: () => Navigator.pop(context),
