@@ -1,6 +1,6 @@
 import 'package:daily_tasks/db/tasks_database.dart';
 import 'package:flutter/material.dart';
-import '../model/tasks.dart';
+import '../../../model/tasks_model.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({
@@ -64,7 +64,7 @@ class _AddTaskState extends State<AddTask> {
         ElevatedButton(
           child: const Text('DeleteAll'),
           onPressed: () {
-            taskDatabase.deleteAll();
+            taskDatabase.deleteAllTasks();
           },
         ),
         ElevatedButton(
@@ -74,7 +74,7 @@ class _AddTaskState extends State<AddTask> {
         ElevatedButton(
           child: const Text('Add'),
           onPressed: () {
-            taskDatabase.create(
+            taskDatabase.createTask(
               Task(
                 taskName: taskNameController.text,
                 description: taskDescriptionController.text,

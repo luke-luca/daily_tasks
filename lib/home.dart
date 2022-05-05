@@ -1,5 +1,5 @@
 import 'package:daily_tasks/pages/Achievements/achievements.dart';
-import 'package:daily_tasks/widget/addtask.dart';
+import 'package:daily_tasks/pages/Dashboard/widgets/addtask.dart';
 import 'pages/Calendar/calendar.dart';
 import 'pages/Dashboard/dashboard.dart';
 import 'pages/Settings/settings.dart';
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        notchMargin: 5,
+        notchMargin: 2,
         child: SizedBox(
           height: 60,
           child: Row(
@@ -68,9 +68,9 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.home_sharp,
                             color: currentTab == 0
-                                ? Colors.deepOrange
-                                : Colors.grey,
-                            size: 32,
+                                ? const Color.fromARGB(255, 255, 156, 111)
+                                : Colors.black,
+                            size: 36,
                           ),
                         ]),
                   ),
@@ -91,9 +91,9 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.calendar_month_sharp,
                             color: currentTab == 1
-                                ? Colors.deepOrange
-                                : Colors.grey,
-                            size: 32,
+                                ? const Color.fromARGB(255, 255, 156, 111)
+                                : Colors.black,
+                            size: 36,
                           ),
                         ]),
                   ),
@@ -121,9 +121,9 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.emoji_events_sharp,
                             color: currentTab == 2
-                                ? Colors.deepOrange
-                                : Colors.grey,
-                            size: 32,
+                                ? const Color.fromARGB(255, 255, 156, 111)
+                                : Colors.black,
+                            size: 36,
                           ),
                         ]),
                   ),
@@ -144,9 +144,9 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.settings_sharp,
                             color: currentTab == 3
-                                ? Colors.deepOrange
-                                : Colors.grey,
-                            size: 32,
+                                ? const Color.fromARGB(255, 255, 156, 111)
+                                : Colors.black,
+                            size: 36,
                           ),
                         ]),
                   ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import '../models/tasks_series.dart';
+import '../../dashboard/models/tasks_series_model.dart';
 
 class TasksChart extends StatelessWidget {
   final List<TasksSeries> data;
 
-  const TasksChart({required this.data});
+  const TasksChart({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

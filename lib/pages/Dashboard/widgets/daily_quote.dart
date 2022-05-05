@@ -1,3 +1,4 @@
+import 'package:daily_tasks/styles.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../models/quote.dart';
@@ -15,7 +16,7 @@ class _DailyQuoteState extends State<DailyQuote> {
   @override
   void initState() {
     super.initState();
-    futureQuote = fetchQuote();
+    futureQuote = _fetchQuote();
   }
 
   @override
@@ -41,7 +42,7 @@ class _DailyQuoteState extends State<DailyQuote> {
                     snapshot.data!.first.quoteText +
                         ' - ' +
                         snapshot.data!.first.quoteAuthor,
-                    style: const TextStyle(fontSize: 14),
+                    style: CustomStyles.quote,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -53,7 +54,7 @@ class _DailyQuoteState extends State<DailyQuote> {
     );
   }
 
-  Future<List<Quote>> fetchQuote() async {
+  Future<List<Quote>> _fetchQuote() async {
     Dio dio = Dio();
     RequestOptions options = RequestOptions(
       baseUrl: 'https://zenquotes.io',

@@ -1,3 +1,4 @@
+import 'package:daily_tasks/styles.dart';
 import 'package:flutter/material.dart';
 
 class DashboardStats extends StatelessWidget {
@@ -10,36 +11,42 @@ class DashboardStats extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 8.0, bottom: 8.00),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0, bottom: 8.00),
           child: Text(
             'Hi, John',
             textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 22,
-            ),
+            style: CustomStyles.h2,
           ),
         ),
         Row(
-          children: const [
-            Text('-', style: TextStyle(color: Colors.deepOrange)),
-            Text('•', style: TextStyle(color: Colors.deepOrange)),
-            Text('Tasks: 40'),
+          children: [
+            const Text('-', style: TextStyle(color: Colors.deepOrange)),
+            const Text('•', style: TextStyle(color: Colors.deepOrange)),
+            Text(
+              'Tasks: 40',
+              style: CustomStyles.paragraph,
+            ),
           ],
         ),
         Row(
-          children: const [
-            Text('-', style: TextStyle(color: Colors.deepOrange)),
-            Text('•', style: TextStyle(color: Colors.deepOrange)),
-            Text('Pomodoros: 40'),
+          children: [
+            const Text('-', style: TextStyle(color: Colors.deepOrange)),
+            const Text('•', style: TextStyle(color: Colors.deepOrange)),
+            Text(
+              'Pomodoros: 40',
+              style: CustomStyles.paragraph,
+            ),
           ],
         ),
         Row(
-          children: const [
-            Text('-', style: TextStyle(color: Colors.deepOrange)),
-            Text('•', style: TextStyle(color: Colors.deepOrange)),
-            Text('Time Spent: 40'),
+          children: [
+            const Text('-', style: TextStyle(color: Colors.deepOrange)),
+            const Text('•', style: TextStyle(color: Colors.deepOrange)),
+            Text(
+              'Time Spent: 40',
+              style: CustomStyles.paragraph,
+            ),
           ],
         ),
       ],

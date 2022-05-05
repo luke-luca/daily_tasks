@@ -1,4 +1,4 @@
-import 'package:daily_tasks/pages/Dashboard/models/tasks_series.dart';
+import 'package:daily_tasks/pages/dashboard/models/tasks_series_model.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 

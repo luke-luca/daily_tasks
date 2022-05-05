@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: ('Rubik'),
       ),
       home: const Home(),
-      debugShowCheckedModeBanner: true,
     );
   }
 }

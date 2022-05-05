@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import '../model/tasks.dart';
+import '../model/tasks_model.dart';
 
 class TasksDatabase {
   static final TasksDatabase instance = TasksDatabase._init();
@@ -39,7 +39,7 @@ class TasksDatabase {
     ''');
   }
 
-  Future<Task> create(Task task) async {
+  Future<Task> createTask(Task task) async {
     final db = await instance.database;
     final id = await db.insert(tableTasks, task.toJson());
     return task.copy(id: id);
@@ -65,19 +65,19 @@ class TasksDatabase {
     return result.map((map) => Task.fromJson(map)).toList();
   }
 
-  Future<int> update(Task task) async {
+  Future<int> updateTask(Task task) async {
     final db = await instance.database;
     return await db.update(tableTasks, task.toJson(),
         where: '${TaskFields.id} = ?', whereArgs: [task.id]);
   }
 
-  Future<int> delete(int id) async {
+  Future<int> deleteTask(int id) async {
     final db = await instance.database;
     return await db
         .delete(tableTasks, where: '${TaskFields.id} = ?', whereArgs: [id]);
   }
 
-  Future deleteAll() async {
+  Future deleteAllTasks() async {
     final db = await instance.database;
     return await db.delete(tableTasks);
   }

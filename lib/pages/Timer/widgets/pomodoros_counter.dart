@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CheckRow extends StatelessWidget {
-  const CheckRow({
+class PomodorosCounter extends StatelessWidget {
+  const PomodorosCounter({
     Key? key,
     this.isDone = false,
   }) : super(key: key);
@@ -12,7 +12,7 @@ class CheckRow extends StatelessWidget {
     if (isDone) {
       return const BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.orange,
+        color: Color.fromARGB(255, 255, 178, 143),
       );
     }
     return buildBox();
@@ -25,55 +25,54 @@ class CheckRow extends StatelessWidget {
         width: 200,
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.orange,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Visibility(
-                  visible: isDone,
-                  child: const Icon(Icons.check),
-                ),
-              ),
-            ),
-            const Expanded(child: Divider(color: Colors.black)),
-            Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.orange,
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(Icons.check),
-              ),
-            ),
-            const Expanded(child: Divider(color: Colors.black)),
-            Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.orange,
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(Icons.check),
-              ),
-            ),
-            const Expanded(child: Divider(color: Colors.black)),
-            Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.orange,
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(Icons.check),
-              ),
-            ),
+            TimePoint(isDone: isDone),
+            const Expanded(
+                child: Divider(
+              color: Colors.black,
+              thickness: 2,
+            )),
+            TimePoint(isDone: isDone),
+            const Expanded(
+                child: Divider(
+              color: Colors.black,
+              thickness: 2,
+            )),
+            TimePoint(isDone: isDone),
+            const Expanded(
+                child: Divider(
+              color: Colors.black,
+              thickness: 2,
+            )),
+            TimePoint(isDone: isDone),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class TimePoint extends StatelessWidget {
+  const TimePoint({
+    Key? key,
+    required this.isDone,
+  }) : super(key: key);
+
+  final bool isDone;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: Color.fromARGB(255, 255, 178, 143),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Visibility(
+          visible: true,
+          child: const Icon(Icons.check),
         ),
       ),
     );

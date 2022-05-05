@@ -1,5 +1,5 @@
-import 'package:daily_tasks/db/tasks_database.dart';
 import 'package:flutter/material.dart';
+import '../../Timer/timerscreen.dart';
 
 class DashboardTile extends StatelessWidget {
   const DashboardTile({
@@ -21,38 +21,51 @@ class DashboardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-      child: Center(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const TimerScreen()));
+      },
+      child: GridTile(
         child: Stack(
           fit: StackFit.expand,
           children: [
             Container(
                 decoration: BoxDecoration(
-                  color: Colors.deepOrange,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
+                      color: Colors.grey.withOpacity(0.8),
+                      spreadRadius: 10,
+                      blurRadius: 5,
+                      offset: Offset(0, 7),
                     ),
                   ],
                 ),
-                width: 20,
-                height: 20,
-                child: Column(
-                  children: [
-                    Text(
-                      textTaskName,
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      children: [
+                        Text(
+                          textTaskName,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          textTaskDescription,
+                        ),
+                        Text(
+                          textTaskCategory,
+                        ),
+                        Text(textTaskMinutes + ":" + textTaskSeconds),
+                      ],
                     ),
-                    Text(textTaskDescription),
-                    Text(textTaskCategory),
-                    Text(textTaskMinutes),
-                    Text(textTaskSeconds),
-                  ],
+                  ),
                 )),
             if (editingMode)
               Align(
@@ -60,7 +73,7 @@ class DashboardTile extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(Icons.delete),
                   color: Colors.black87,
-                  onPressed: _delete,
+                  onPressed: () {},
                 ),
               ),
           ],
@@ -68,6 +81,4 @@ class DashboardTile extends StatelessWidget {
       ),
     );
   }
-
-  void _delete() {}
 }

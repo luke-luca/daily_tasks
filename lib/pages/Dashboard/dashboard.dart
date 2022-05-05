@@ -1,11 +1,11 @@
 import 'package:daily_tasks/db/tasks_database.dart';
 import 'package:daily_tasks/pages/Dashboard/widgets/daily_quote.dart';
-import 'package:daily_tasks/pages/Dashboard/widgets/tasks_chart.dart';
+import 'package:daily_tasks/styles.dart';
 import 'package:flutter/material.dart';
-import '../../model/tasks.dart';
+import '../../model/tasks_model.dart';
+import '../dashboard/widgets/tasks_flcharts.dart';
 import 'widgets/dashboard_stats.dart';
 import 'widgets/dashboard_tile.dart';
-import 'models/tasks.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -18,12 +18,14 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   late Future<List<Task>> tasksList;
+  late Task task;
+  bool isLoading = false;
   bool editingMode = false;
 
   @override
   void initState() {
     super.initState();
-    tasksList = getTaskList();
+    tasksList = _getTaskList();
   }
 
   @override
@@ -38,8 +40,8 @@ class _DashboardState extends State<Dashboard> {
                 child: SizedBox(
                   width: 190,
                   child: Image.asset(
-                    'lib/assets/images/human.png',
-                    fit: BoxFit.contain,
+                    'lib/assets/images/Humaaan.png',
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
               ),
@@ -50,32 +52,27 @@ class _DashboardState extends State<Dashboard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Dashboard',
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 45,
-                        ),
+                        style: CustomStyles.h1,
                       ),
                       const DashboardStats(),
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
+                        padding: EdgeInsets.only(top: 60.0, bottom: 20.00),
                         child: Center(
                           child: DailyQuote(),
                         ),
                       ),
-                      TasksChart(
-                        data: data,
-                      ),
+                      BarChartBuider(),
                       Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Your daily tasks',
-                                style: TextStyle(fontSize: 24),
+                                style: CustomStyles.h3,
                               ),
                               TextButton(
                                 onPressed: () => _onTapEdit(context),
@@ -84,51 +81,56 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                           Container(
-                            height: 150,
-                            child: FutureBuilder<List<Task>>(
-                              future: tasksList,
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                } else if (!snapshot.hasData) {
-                                  return const Center(child: Text('błąd'));
-                                } else {
-                                  return GridView.builder(
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 1,
-                                      crossAxisSpacing: 10,
-                                      mainAxisSpacing: 10,
-                                      mainAxisExtent: 200,
-                                    ),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: snapshot.data!.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, i) {
-                                      return DashboardTile(
-                                        editingMode: editingMode,
-                                        textTaskName:
-                                            snapshot.data?[i].taskName ?? 'b/d',
-                                        textTaskCategory:
-                                            snapshot.data?[i].category ?? 'b/d',
-                                        textTaskDescription:
-                                            snapshot.data?[i].description ??
-                                                'b/d',
-                                        textTaskMinutes: snapshot
-                                                .data?[i].minutes
-                                                .toString() ??
-                                            'b/d',
-                                        textTaskSeconds: snapshot
-                                                .data?[i].seconds
-                                                .toString() ??
-                                            'b/d',
-                                      );
-                                    },
-                                  );
-                                }
-                              },
+                            height: 120,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: FutureBuilder<List<Task>>(
+                                future: tasksList,
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
+                                  } else if (!snapshot.hasData) {
+                                    return const Center(child: Text('Error'));
+                                  } else {
+                                    return GridView.builder(
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 1,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                        mainAxisExtent: 200,
+                                      ),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: snapshot.data!.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, i) {
+                                        return DashboardTile(
+                                          editingMode: editingMode,
+                                          textTaskName:
+                                              snapshot.data?[i].taskName ??
+                                                  'b/d',
+                                          textTaskCategory:
+                                              snapshot.data?[i].category ??
+                                                  'b/d',
+                                          textTaskDescription:
+                                              snapshot.data?[i].description ??
+                                                  'b/d',
+                                          textTaskMinutes: snapshot
+                                                  .data?[i].minutes
+                                                  .toString() ??
+                                              'b/d',
+                                          textTaskSeconds: snapshot
+                                                  .data?[i].seconds
+                                                  .toString() ??
+                                              'b/d',
+                                        );
+                                      },
+                                    );
+                                  }
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -150,7 +152,7 @@ class _DashboardState extends State<Dashboard> {
     });
   }
 
-  Future<List<Task>> getTaskList() async {
+  Future<List<Task>> _getTaskList() async {
     List<Task> taskList = await TasksDatabase.instance.readAllTasks();
     return taskList;
   }
