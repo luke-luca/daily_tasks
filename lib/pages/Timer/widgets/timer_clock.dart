@@ -1,37 +1,79 @@
-import 'package:daily_tasks/styles.dart';
+import 'package:daily_tasks/pages/dashboard/widgets/dashboard_tile.dart';
 import 'package:flutter/material.dart';
 
 class TimerClock extends StatefulWidget {
-  const TimerClock({Key? key}) : super(key: key);
+  final String test;
+  const TimerClock({Key? key, required this.test}) : super(key: key);
 
   @override
   State<TimerClock> createState() => _TimerClockState();
 }
 
-class _TimerClockState extends State<TimerClock> {
+class _TimerClockState extends State<TimerClock> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  int levelClock = 180;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+        vsync: this, duration: Duration(seconds: levelClock));
+
+    _controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: 200.0,
+          height: 300.0,
           child: Stack(
             children: <Widget>[
               Center(
                 child: Container(
-                  width: 200,
-                  height: 300,
-                  child: new CircularProgressIndicator(
-                    strokeWidth: 3,
+                  width: 300,
+                  height: 700,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 6,
                     value: 1.0,
                   ),
                 ),
               ),
-              Center(child: Text("25:00", style: CustomStyles.h1)),
+              Center(
+                child: Countdown(
+                  animation: StepTween(
+                    begin: levelClock,
+                    end: 0,
+                  ).animate(_controller),
+                ),
+              )
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class Countdown extends AnimatedWidget {
+  Countdown({Key? key, required this.animation})
+      : super(key: key, listenable: animation);
+  Animation<int> animation;
+
+  @override
+  build(BuildContext context) {
+    Duration clockTimer = Duration(seconds: animation.value);
+
+    String timerText =
+        '${clockTimer.inMinutes.remainder(60).toString()}:${clockTimer.inSeconds.remainder(60).toString().padLeft(2, '0')}';
+    return Text(
+      timerText,
+      style: TextStyle(
+        fontSize: 30,
+        color: Theme.of(context).primaryColor,
+      ),
     );
   }
 }

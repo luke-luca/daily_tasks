@@ -108,7 +108,8 @@ class _BarChart extends StatelessWidget {
                 toY: 8,
                 color: _barsColor,
                 width: 20,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5))),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5))),
           ],
           showingTooltipIndicators: [0],
         ),
@@ -119,7 +120,8 @@ class _BarChart extends StatelessWidget {
                 toY: 10,
                 color: _barsColor,
                 width: 20,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5)))
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5)))
           ],
           showingTooltipIndicators: [0],
         ),
@@ -130,7 +132,8 @@ class _BarChart extends StatelessWidget {
                 toY: 14,
                 color: _barsColor,
                 width: 20,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5)))
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5)))
           ],
           showingTooltipIndicators: [0],
         ),
@@ -141,7 +144,8 @@ class _BarChart extends StatelessWidget {
                 toY: 15,
                 color: _barsColor,
                 width: 20,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5)))
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5)))
           ],
           showingTooltipIndicators: [0],
         ),
@@ -152,7 +156,8 @@ class _BarChart extends StatelessWidget {
                 toY: 13,
                 color: _barsColor,
                 width: 20,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5)))
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5)))
           ],
           showingTooltipIndicators: [0],
         ),
@@ -163,7 +168,8 @@ class _BarChart extends StatelessWidget {
                 toY: 10,
                 color: _barsColor,
                 width: 20,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5)))
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5)))
           ],
           showingTooltipIndicators: [0],
         ),
@@ -174,7 +180,8 @@ class _BarChart extends StatelessWidget {
                 toY: 10,
                 color: _barsColor,
                 width: 20,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(5)))
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5)))
           ],
           showingTooltipIndicators: [0],
         ),

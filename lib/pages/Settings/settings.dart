@@ -13,7 +13,7 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       appBar: AppBar(title: const Text('Calendar')),
       body: const Center(
-        child: Text('Calendar Screen', style: TextStyle(fontSize: 40)),
+        child: Text('Settings', style: TextStyle(fontSize: 40)),
       ),
     );
   }

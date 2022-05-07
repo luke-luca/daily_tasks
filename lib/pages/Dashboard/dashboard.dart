@@ -108,6 +108,7 @@ class _DashboardState extends State<Dashboard> {
                                       itemBuilder: (context, i) {
                                         return DashboardTile(
                                           editingMode: editingMode,
+                                          textTaskId: snapshot.data?[i].id ?? 0,
                                           textTaskName:
                                               snapshot.data?[i].taskName ??
                                                   'b/d',

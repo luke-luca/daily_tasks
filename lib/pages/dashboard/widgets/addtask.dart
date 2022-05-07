@@ -1,5 +1,6 @@
 import 'package:daily_tasks/db/tasks_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../model/tasks_model.dart';
 
 class AddTask extends StatefulWidget {
@@ -22,6 +23,7 @@ class _AddTaskState extends State<AddTask> {
   @override
   void initState() {
     super.initState();
+    _refreshTasks();
   }
 
   @override
@@ -31,7 +33,6 @@ class _AddTaskState extends State<AddTask> {
     taskCategoryController.dispose();
     taskMinutesController.dispose();
     taskSecondsController.dispose();
-
     super.dispose();
   }
 
@@ -52,12 +53,21 @@ class _AddTaskState extends State<AddTask> {
             controller: taskCategoryController,
             decoration: const InputDecoration(labelText: 'Task Category'),
           ),
-          TextField(
+          TextFormField(
               controller: taskMinutesController,
-              decoration: const InputDecoration(labelText: 'Task Minutes')),
-          TextField(
+              decoration: const InputDecoration(labelText: 'Task Minutes'),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ]),
+          TextFormField(
               controller: taskSecondsController,
-              decoration: const InputDecoration(labelText: 'Task Seconds')),
+              decoration: const InputDecoration(labelText: 'Task Seconds'),
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(
+                  RegExp(r'^\d+\.?\d{0,2}'),
+                ),
+              ]),
         ],
       ),
       actions: [
@@ -65,6 +75,7 @@ class _AddTaskState extends State<AddTask> {
           child: const Text('DeleteAll'),
           onPressed: () {
             taskDatabase.deleteAllTasks();
+            _refreshTasks();
           },
         ),
         ElevatedButton(
@@ -83,10 +94,14 @@ class _AddTaskState extends State<AddTask> {
                 seconds: int.parse(taskSecondsController.text),
               ),
             );
-            Navigator.pop(context);
           },
         ),
       ],
     );
+  }
+
+  Future<List<Task>> _refreshTasks() async {
+    List<Task> taskList = await TasksDatabase.instance.readAllTasks();
+    return taskList;
   }
 }
