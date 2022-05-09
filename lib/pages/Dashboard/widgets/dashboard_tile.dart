@@ -33,8 +33,11 @@ class _DashboardTileState extends State<DashboardTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const TimerScreen()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    TimerScreen(passMinutes: widget.textTaskMinutes)));
       },
       child: GridTile(
         child: Stack(

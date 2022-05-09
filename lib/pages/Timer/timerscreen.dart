@@ -1,15 +1,25 @@
 import 'package:daily_tasks/pages/Timer/widgets/pomodoros_counter.dart';
 import 'package:daily_tasks/pages/Timer/widgets/timer_clock.dart';
+import 'package:daily_tasks/styles.dart';
 import 'package:flutter/material.dart';
 
 class TimerScreen extends StatefulWidget {
-  const TimerScreen({Key? key}) : super(key: key);
+  final String passMinutes;
+
+  const TimerScreen({Key? key, required this.passMinutes}) : super(key: key);
 
   @override
   State<TimerScreen> createState() => _TimerScreenState();
 }
 
 class _TimerScreenState extends State<TimerScreen> {
+  late final String passMinutes = widget.passMinutes;
+  bool playAnimation = true;
+  TimerScreen() {
+    int parsedMinutes = int.parse(passMinutes);
+  }
+
+  late final int parsedMinutes = int.parse(passMinutes);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +38,10 @@ class _TimerScreenState extends State<TimerScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const PomodorosCounter(),
-                  TimerClock(test: '25'),
+                  PomodorosCounter(),
+                  TimerClock(
+                    parsedMinutes: parsedMinutes,
+                  ),
                   ElevatedButton(
                     onPressed: () {},
                     child: const Icon(Icons.play_arrow),
@@ -43,6 +55,12 @@ class _TimerScreenState extends State<TimerScreen> {
             ),
           ),
         ));
+  }
+
+  void stopTimer() {
+    setState(() {
+      playAnimation = !playAnimation;
+    });
   }
 }
 

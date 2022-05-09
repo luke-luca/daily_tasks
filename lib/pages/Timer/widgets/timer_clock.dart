@@ -1,9 +1,11 @@
 import 'package:daily_tasks/pages/dashboard/widgets/dashboard_tile.dart';
+import 'package:daily_tasks/styles.dart';
 import 'package:flutter/material.dart';
 
 class TimerClock extends StatefulWidget {
-  final String test;
-  const TimerClock({Key? key, required this.test}) : super(key: key);
+  final int parsedMinutes;
+
+  const TimerClock({Key? key, required this.parsedMinutes}) : super(key: key);
 
   @override
   State<TimerClock> createState() => _TimerClockState();
@@ -11,16 +13,24 @@ class TimerClock extends StatefulWidget {
 
 class _TimerClockState extends State<TimerClock> with TickerProviderStateMixin {
   late AnimationController _controller;
-  int levelClock = 180;
+  late final int parsedMinutes = widget.parsedMinutes;
+  TimerClock() {
+    parsedMinutes;
+  }
 
+  late int levelClock = parsedMinutes * 60;
+  bool playAnimation = false;
   @override
   void initState() {
     super.initState();
 
     _controller = AnimationController(
         vsync: this, duration: Duration(seconds: levelClock));
-
-    _controller.forward();
+    if (playAnimation) {
+      _controller.forward();
+    } else {
+      _controller.stop();
+    }
   }
 
   @override
